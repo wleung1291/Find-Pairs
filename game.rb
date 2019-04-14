@@ -30,22 +30,30 @@ class Game
             prev_guess = []
             guess_arr = []
             board.render()
-
+            within_range = false
             until guesses == 2
                 puts
                 puts "Enter a position(from 0 to #{board.n - 1}) with a space (e.g., `1 0`)"
                 print "> "
                 str = gets.chomp.split(" ")
                 str.map! { |ele| ele.to_i }
-
+                # check if guess is within range of the board
+                if str.first <= (board.n - 1) &&  str.last <= (board.n - 1)
+                    within_range = true
+                end
                 # Checks if the 2 guesses are not the same and if the current
                 # guess is not an already correctly guessed pair position
-                if prev_guess != str && !matching_pairs.include?(str)
-                    prev_guess = str
-                    guess_arr << str
-                    board.reveal(str)
-                    guesses += 1
-                    str = []
+                if prev_guess != str && !matching_pairs.include?(str) 
+                    if within_range == true
+                        prev_guess = str
+                        guess_arr << str
+                        board.reveal(str)
+                        guesses += 1
+                        str = []
+                        within_range = false
+                    else
+                        puts "Position out of range!"
+                    end
                 else 
                     puts "Try a different position"
                 end
