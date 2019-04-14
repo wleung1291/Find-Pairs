@@ -68,7 +68,9 @@ class Board
     def won?
         @newGrid.each_with_index do |subArr, idx1|
             subArr.each_with_index do |ele, idx2|
-                return false if ele == :+
+                if ele == :+ || ele == :-
+                    return false 
+                end
             end
         end
         render()
