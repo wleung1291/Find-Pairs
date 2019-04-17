@@ -19,7 +19,7 @@ class Board
             @grid[i] = arr[i]
         end
 
-        @grid = @grid.each_slice(@n).to_a # convert back to a n-D array
+        @grid = @grid.each_slice(@n).to_a # Create sub-arrays of length n
     end
 
     #  Accepts an array containing a pair of indices in the form 
